@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 const useRecord = () => {
   const [current, setCurrent] = useState(0);
-  const [colorHistory, addToHistory] = useState([]);
+  const [colorHistory, addToHistory] = useState(['#ffffff']);
 
   useEffect(() => {
     // console.log('current index - useEffect', current);
@@ -44,12 +44,20 @@ function App() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div>
-        <button onClick={undo} style={{ margin: '10px' }} disabled={current <= 0}>undo</button>
-        <button onClick={redo} style={{ margin: '10px' }} disabled={current >= colorHistory.length - 1 || colorHistory.length <= 1}>redo</button>
+        <button
+          onClick={undo}
+          style={{ margin: '10px' }}
+          disabled={current <= 0}
+        >undo</button>
+        <button
+          onClick={redo}
+          style={{ margin: '10px' }}
+          disabled={current >= colorHistory.length - 1 || colorHistory.length <= 1}
+        >redo</button>
       </div>
       <label /> Choose A Color:
       <input type="color" style={{ margin: '10px' }} value={colorHistory[current]} onChange={(e) => record(e.target.value)} />
-      {if(colorHistory.length ? <div style={{ backgroundColor: colorHistory[current], width: '10rem', height: '10rem', margin: '10px' }}></div> : '')}
+      <div style={{ backgroundColor: colorHistory[current], width: '10rem', height: '10rem', margin: '10px' }}></div>
     </div>
   );
 }
