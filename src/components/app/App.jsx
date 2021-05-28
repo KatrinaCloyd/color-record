@@ -64,7 +64,6 @@ function App() {
         >redo</button>
       </div>
       <label> Choose A Color:
-
       <input
           aria-label={'color-input'}
           type="color"
@@ -74,6 +73,7 @@ function App() {
         />
       </label>
       <div
+        aria-label={'clr-box'}
         style={{
           backgroundColor: colorHistory[current],
           width: '10rem',

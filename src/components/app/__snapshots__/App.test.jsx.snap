@@ -34,6 +34,7 @@ Object {
           />
         </label>
         <div
+          aria-label="clr-box"
           style="background-color: rgb(255, 255, 255); width: 10rem; height: 10rem; margin: 10px;"
         />
       </div>
@@ -69,6 +70,7 @@ Object {
         />
       </label>
       <div
+        aria-label="clr-box"
         style="background-color: rgb(255, 255, 255); width: 10rem; height: 10rem; margin: 10px;"
       />
     </div>

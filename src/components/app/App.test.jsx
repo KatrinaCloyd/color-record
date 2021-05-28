@@ -1,7 +1,5 @@
 import React from 'react';
-import { getByRole, render, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import App from './App';
 
@@ -16,33 +14,45 @@ describe('App component', () => {
     expect(redo).toHaveAttribute('disabled');
     const colorInput = screen.getByLabelText('Choose A Color:');
     expect(colorInput).toHaveValue('#ffffff');
+    const colorBox = screen.getByLabelText('clr-box');
+    expect(colorBox).toHaveStyle({ 'background-color': '#ffffff' });
 
-    // fireEvent.input(colorInput, { target: { value: '#FF0000' } });
 
+
+    fireEvent.change(colorInput, { target: { value: '#FF0000' } });
+    expect(colorBox).toHaveStyle({ 'background-color': '#FF0000' });
+
+    fireEvent.change(colorInput, { target: { value: '#0000FF' } });
+    expect(colorBox).toHaveStyle({ 'background-color': '#0000FF' });
+
+    fireEvent.change(colorInput, { target: { value: '#00FF00' } });
+    expect(colorBox).toHaveStyle({ 'background-color': '#00FF00' });
+
+    fireEvent.click(undo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#0000FF' });
+
+    fireEvent.click(undo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#FF0000' });
+
+    fireEvent.click(redo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#0000FF' });
+
+    fireEvent.change(colorInput, { target: { value: '#FFFF00' } });
+    expect(colorBox).toHaveStyle({ 'background-color': '#FFFF00' });
+
+    fireEvent.click(undo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#0000FF' });
+
+    fireEvent.click(undo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#FF0000' });
+
+    fireEvent.click(redo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#0000FF' });
+
+    fireEvent.click(redo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#FFFF00' });
+
+    fireEvent.click(redo);
+    expect(colorBox).toHaveStyle({ 'background-color': '#00FF00' });
   });
 });
-
-// select #FF0000 
-// Expect the square change to #FF0000
-// select #0000FF 
-// Expect the square change to #0000FF
-// select #00FF00
-// Expect the square change to #00FF00
-// click undo
-// Expect the square change to #0000FF
-// press undo
-// Expect the square change to #FF0000
-// press redo
-// Expect the square change to #0000FF
-// select #FFFF00
-// Expect the square change to #FFFF00
-// press undo
-// Expect the square change to #0000FF
-// press undo
-// Expect the square change to #FF0000
-// press redo
-// Expect the square change to #0000FF
-// press redo
-// Expect the square change to #FFFF00
-// press redo
-// Expect the square change to #00FF00
