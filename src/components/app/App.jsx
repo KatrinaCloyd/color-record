@@ -6,6 +6,8 @@ const useRecord = () => {
   const [colorHistory, addToHistory] = useState(['#FF0000']);
 
   useEffect(() => {
+    console.log('current index - useEffect', current);
+    console.log('current history array - useEffect', colorHistory);
   }, [current]);
 
   const undo = () => {
@@ -16,25 +18,29 @@ const useRecord = () => {
     setCurrent((prev) => prev + 1);
   };
 
-  const record = (clr) => {
-    console.log(clr);
-    //this just adds it to the end, we need to add it in at the index given.
-    addToHistory((prev) => [...prev, clr]);
-    console.log('current history array', colorHistory);
-    setCurrent((prev) => prev + 1);
-    console.log('current index', current);
-  };
-
   // const record = (clr) => {
-  //   // console.log(clr);
-  //   // console.log('current index', current);
+  //   console.log('chosen color', clr);
+  //   console.log('current index', current);
+  //   //this just adds it to the end, we need to add it in at the index given.
+  //   addToHistory((prev) => [...prev, clr]);
+  //   console.log('current history array', colorHistory);
   //   setCurrent((prev) => prev + 1);
-  //   // console.log('index now', current);
-  //   //this just adds it to the end, we need to add it in at the index given.. 
-  //   // const newHst = colorHistory.splice(current, 0, clr);
-  //   // addToHistory(newHst);
-  //   // console.log('current history array', colorHistory);
+  //   console.log('current index', current);
   // };
+
+  const record = (clr) => {
+    if (colorHistory.length === current + 1) {
+      addToHistory((prev) => [...prev, clr]);
+      setCurrent((prev) => prev + 1);
+    }
+    else {
+      addToHistory((prevArr) => [
+        ...prevArr.slice(0, current + 1), // ...before
+        clr,
+        ...prevArr.slice(current + 1)]); // ...after
+      setCurrent((prev) => prev + 1);
+    }
+  };
 
   return { current, undo, redo, record, colorHistory };
 };
