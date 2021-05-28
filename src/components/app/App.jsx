@@ -17,15 +17,24 @@ const useRecord = () => {
   };
 
   const record = (clr) => {
-    // console.log(clr);
-    // console.log('current index', current);
+    console.log(clr);
+    //this just adds it to the end, we need to add it in at the index given.
+    addToHistory((prev) => [...prev, clr]);
+    console.log('current history array', colorHistory);
     setCurrent((prev) => prev + 1);
-    // console.log('index now', current);
-    //this just adds it to the end, we need to add it in at the index given.. 
-    // const newHst = colorHistory.splice(current, 0, clr);
-    // addToHistory(newHst);
-    // console.log('current history array', colorHistory);
+    console.log('current index', current);
   };
+
+  // const record = (clr) => {
+  //   // console.log(clr);
+  //   // console.log('current index', current);
+  //   setCurrent((prev) => prev + 1);
+  //   // console.log('index now', current);
+  //   //this just adds it to the end, we need to add it in at the index given.. 
+  //   // const newHst = colorHistory.splice(current, 0, clr);
+  //   // addToHistory(newHst);
+  //   // console.log('current history array', colorHistory);
+  // };
 
   return { current, undo, redo, record, colorHistory };
 };
@@ -37,7 +46,7 @@ function App() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div>
-        <button onClick={undo} style={{ margin: '10px' }} disabled={current <= 1}>undo</button>
+        <button onClick={undo} style={{ margin: '10px' }} disabled={current <= 0}>undo</button>
         <button onClick={redo} style={{ margin: '10px' }} disabled={current >= colorHistory.length - 1 || colorHistory.length <= 1}>redo</button>
       </div>
       <label /> Choose A Color:
