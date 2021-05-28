@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRecord } from '../../hooks/useRecord';
 import ClrBox from '../display/ClrBox';
-import Controls from '../display/controls';
+import Controls from '../display/Controls';
 
 function App() {
 
