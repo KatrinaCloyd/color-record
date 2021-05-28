@@ -1,55 +1,24 @@
 /* eslint-disable indent */
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
-
-const useRecord = () => {
-  const [current, setCurrent] = useState(0);
-  const [colorHistory, addToHistory] = useState([]);
-
-  useEffect(() => {
-    // console.log('current index - useEffect', current);
-    // console.log('current history array - useEffect', colorHistory);
-  }, [current]);
-
-  const undo = () => {
-    setCurrent((prev) => prev - 1);
-  };
-
-  const redo = () => {
-    setCurrent((prev) => prev + 1);
-  };
-
-  const record = (clr) => {
-    if (colorHistory.length === current + 1) {
-      addToHistory((prev) => [...prev, clr]);
-      setCurrent((prev) => prev + 1);
-    }
-    else {
-      addToHistory((prevArr) =>
-        // prevArr.splice(current + 1, 0, clr));
-        [...prevArr.slice(0, current + 1), // ...before
-          clr,
-        ...prevArr.slice(current + 1)]); // ...after
-      setCurrent((prev) => prev + 1);
-    }
-  };
-
-  return { current, undo, redo, record, colorHistory };
-};
+import React from 'react';
+import { useRecord } from '../../hooks/useRecord';
+import ClrBox from '../display/ClrBox';
+import Controls from '../display/Controls';
 
 function App() {
 
   const { current, undo, redo, record, colorHistory } = useRecord();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div>
-        <button onClick={undo} style={{ margin: '10px' }} disabled={current <= 0}>undo</button>
-        <button onClick={redo} style={{ margin: '10px' }} disabled={current >= colorHistory.length - 1 || colorHistory.length <= 1}>redo</button>
-      </div>
-      <label /> Choose A Color:
-      <input type="color" style={{ margin: '10px' }} value={colorHistory[current]} onChange={(e) => record(e.target.value)} />
-      {if(colorHistory.length ? <div style={{ backgroundColor: colorHistory[current], width: '10rem', height: '10rem', margin: '10px' }}></div> : '')}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}
+    >
+      <Controls undo={undo} current={current} redo={redo} colorHistory={colorHistory} record={record} />
+      <ClrBox current={current} colorHistory={colorHistory} />
     </div>
   );
 }
