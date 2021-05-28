@@ -34,9 +34,13 @@ Object {
           />
         </label>
         <div
-          aria-label="clr-box"
-          style="background-color: rgb(255, 255, 255); width: 10rem; height: 10rem; margin: 10px;"
-        />
+          style="background-color: rgb(239, 239, 239); border: .25px solid #919191; border-radius: 3px; width: 11rem; height: 11rem; display: flex; flex-direction: column; align-items: center; justify-content: center;"
+        >
+          <div
+            aria-label="clr-box"
+            style="background-color: rgb(255, 255, 255); border: .25px solid #919191; width: 10rem; height: 10rem;"
+          />
+        </div>
       </div>
     </div>
   </body>,
@@ -70,9 +74,13 @@ Object {
         />
       </label>
       <div
-        aria-label="clr-box"
-        style="background-color: rgb(255, 255, 255); width: 10rem; height: 10rem; margin: 10px;"
-      />
+        style="background-color: rgb(239, 239, 239); border: .25px solid #919191; border-radius: 3px; width: 11rem; height: 11rem; display: flex; flex-direction: column; align-items: center; justify-content: center;"
+      >
+        <div
+          aria-label="clr-box"
+          style="background-color: rgb(255, 255, 255); border: .25px solid #919191; width: 10rem; height: 10rem;"
+        />
+      </div>
     </div>
   </div>,
   "debug": [Function],
